@@ -20,7 +20,13 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 const app = express();
 
-app.use(cors());
+// CORS configuration
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? process.env.FRONTEND_URL?.split(',') || ['http://localhost:5173'] // Fallback only if FRONTEND_URL is missing
+    : true, // Allow all origins in development
+  credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
