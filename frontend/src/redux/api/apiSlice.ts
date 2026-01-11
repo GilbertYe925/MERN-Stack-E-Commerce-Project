@@ -8,6 +8,7 @@ if (typeof window !== 'undefined') {
 
 const baseQuery = fetchBaseQuery({ 
   baseUrl: BASE_URL,
+  credentials: 'include', // Include cookies in requests (required for cross-site)
   prepareHeaders: (headers) => {
     return headers;
   },
