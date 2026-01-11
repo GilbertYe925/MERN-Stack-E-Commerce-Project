@@ -42,8 +42,7 @@ app.get("/api/config/paypal", (req: Request, res: Response) => {
     res.send({clientId: process.env.PAYPAL_CLIENT_ID});
 });
 
-const __dirname = path.resolve();
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 // Only start server if not in Vercel environment
 if (process.env.VERCEL !== '1') {
