@@ -10,10 +10,11 @@ import store from './redux/store.ts'
 import Profile from './pages/User/Profile.tsx'
 import Home from './pages/Home.tsx'
 //private route
-import PrivateRoute from './components/PrivateRoute.tsx'
+import PrivateRoute from './components/auth/PrivateRoute.tsx'
 
 //auth
 import Auth from './pages/Auth/Auth.tsx'
+import Contact from './pages/Contact.tsx'
 
 //Admin Routes
 import AdminRoute from './pages/Admin/AdminRoute.tsx'
@@ -36,8 +37,9 @@ import AdminDashboard from './pages/Admin/AdminDashboard.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />} >
+      <Route path="/" element={<App />} >
       <Route path="/auth" element={<Auth />} />
+      <Route path="/contact" element={<Contact />} />
       <Route index={true} path="/" element={<Home />} />
       <Route path="/favorite" element={<Favorites />} />
       <Route path="/cart" element={<Cart />} />

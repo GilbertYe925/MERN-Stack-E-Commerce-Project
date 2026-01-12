@@ -8,8 +8,8 @@ import {
     useUpdateCategoryMutation, 
     useDeleteCategoryMutation 
 } from '../../redux/api/categoryApiSlice'
-import CategoryForm from '../../components/CategoryForm'
-import Modal from '../../components/Modal'
+import CategoryForm from '../../components/forms/CategoryForm'
+import Modal from '../../components/common/Modal'
 import AdminMenu from './AdminMenu'
 
 const CategoryList = () => {

@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react'
 import {FaTrash, FaEdit, FaCheck, FaTimes} from 'react-icons/fa'
-import Loader from '../../components/Loader.tsx'
+import Loader from '../../components/common/Loader.tsx'
 import {toast} from 'react-toastify'
 import { useGetUsersQuery, useDeleteUserMutation, useUpdateUserMutation } from '../../redux/api/usersApiSlice.ts'
-import Message from '../../components/Message.tsx'
+import Message from '../../components/common/Message.tsx'
 
 const UserList = () => {
     const {data:users, refetch, isLoading, error} = useGetUsersQuery(undefined)

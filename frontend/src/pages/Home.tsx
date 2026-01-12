@@ -1,8 +1,8 @@
 import {Link, useSearchParams} from 'react-router-dom'
 import { useGetProductsQuery } from '../redux/api/productApiSlice'
-import Loader from '../components/Loader'
-import Header from '../components/Header'
-import Message from '../components/Message'
+import Loader from '../components/common/Loader'
+import Header from '../components/layout/Header'
+import Message from '../components/common/Message'
 import Product from './Products/Product'
 
 const Home = () => {

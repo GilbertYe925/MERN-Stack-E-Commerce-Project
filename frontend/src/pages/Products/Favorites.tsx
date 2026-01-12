@@ -2,14 +2,16 @@ import {useSelector} from 'react-redux'
 import {RootState} from '../../redux/store'
 import {selectFavoriteProduct} from '../../redux/features/favorites/favoriteSlice'
 import Product from './Product'
+import EmptyState from '../../components/common/EmptyState'
 
 const Favorites = () => {
     const favorites = useSelector(selectFavoriteProduct) || []
     if (!favorites || favorites.length === 0) {
         return (
-            <div>
-                <h1>No favorites found</h1>
-            </div>
+            <EmptyState 
+                title="No favorites found" 
+                message="Start adding products to your favorites" 
+            />
         )
     }
 

@@ -5,7 +5,7 @@ import { useLoginMutation, useRegisterMutation, useRequestPasswordResetMutation,
 import { setCredentials } from '../../redux/features/auth/authSlice';
 import { toast } from 'react-toastify';
 import { RootState } from '../../redux/store';
-import Loader from '../../components/Loader';
+import Loader from '../../components/common/Loader';
 
 type AuthStep = 'email' | 'login' | 'register' | 'forgot-password' | 'reset-password';
 
@@ -135,7 +135,7 @@ const Auth = () => {
         </div>
       </Link>
       
-      <div className="bg-component rounded-2xl p-12 w-[45rem] h-[44rem] flex flex-col relative">
+      <div className="bg-component rounded-3xl p-12 w-[45rem] h-[44rem] flex flex-col relative">
         {(step === 'login' || step === 'register' || step === 'forgot-password' || step === 'reset-password') && (
           <button
             onClick={handleBackToEmail}
@@ -207,7 +207,7 @@ const Auth = () => {
                     Forgot password?
                   </button>
                 </div>
-                
+
                 <button
                   type="submit"
                   disabled={isLoggingIn}

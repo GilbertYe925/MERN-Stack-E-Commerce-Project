@@ -3,7 +3,7 @@ import {AiOutlineShoppingCart} from "react-icons/ai"
 import {useDispatch} from "react-redux"
 import {addToCart} from "../../redux/features/cart/cartSlice"
 import {toast} from "react-toastify"
-import HeartIcon from "./HeartIcon"
+import HeartIcon from "../../components/products/HeartIcon"
 
 const ProductCard = ({p}: {p: any}) => {
     const dispatch = useDispatch();

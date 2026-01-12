@@ -3,7 +3,7 @@ import { RootState } from "../../redux/store"
 import {useEffect, useState} from "react"
 import {useNavigate} from "react-router-dom"
 import { saveShippingAddress, savePaymentMethod } from "../../redux/features/cart/cartSlice"
-import ProgressSteps from "../../components/ProgressSteps"
+import ProgressSteps from "../../components/orders/ProgressSteps"
 
 const Shipping = () => {
     const [paymentMethod, setPaymentMethod] = useState("Paypal")

@@ -6,7 +6,7 @@ import {useFetchCategoriesQuery} from '../redux/api/categoryApiSlice'
 
 import {setCategories, setProducts, setChecked, resetFilters} from '../redux/features/shop/shopSlice'
 
-import Loader from '../components/Loader'
+import Loader from '../components/common/Loader'
 import ProductCard from './Products/ProductCard'
 
 const Shop = () => {

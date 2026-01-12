@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaTrash } from "react-icons/fa";
 import { addToCart, removeFromCart } from "../redux/features/cart/cartSlice";
 import { RootState } from "../redux/store";
+import EmptyState from "../components/common/EmptyState";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -27,9 +28,10 @@ const Cart = () => {
     <>
       <div className="container flex justify-around items-start flex wrap mx-auto mt-8">
         {cartItems.length === 0 ? (
-          <div>
-            Your cart is empty <Link to="/shop">Go To Shop</Link>
-          </div>
+          <EmptyState 
+            title="Your cart is empty" 
+            message="Go to shop to add items" 
+          />
         ) : (
           <>
             <div className="flex flex-col w-[80%]">

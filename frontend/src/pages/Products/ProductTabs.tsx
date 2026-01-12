@@ -2,8 +2,8 @@ import { useState } from 'react'
 import {Link} from 'react-router-dom'
 import Ratings from './Ratings'
 import {useGetTopProductsQuery} from '../../redux/api/productApiSlice'
-import SmallProduct from './SmallProduct'
-import Loader from '../../components/Loader'
+import SmallProduct from '../../components/products/SmallProduct'
+import Loader from '../../components/common/Loader'
 
 const ProductTabs = ({product, loadingProductReview, userInfo, submitHandler, rating, setRating, comment, setComment}: 
     {product: any, loadingProductReview: boolean, userInfo: any, 

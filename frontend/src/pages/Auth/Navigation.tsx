@@ -1,15 +1,13 @@
 import React from 'react'
 import {useState} from 'react'
-import {AiOutlineHome, AiOutlineShopping, AiOutlineLogin, AiOutlineShoppingCart} from 'react-icons/ai'
-import {FaHeart} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 import {useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import {useLogoutMutation} from '../../redux/api/usersApiSlice'
 import {logout} from '../../redux/features/auth/authSlice'
 import { RootState } from '../../redux/store'
-import FavoritesCount from '../Products/FavoritesCount'
-import CartCount from '../Products/CartCount'
+import FavoritesCount from '../../components/products/FavoritesCount'
+import CartCount from '../../components/products/CartCount'
 
 const Navigation = () => {
 
@@ -37,29 +35,33 @@ const Navigation = () => {
   return (
     <nav 
     style={{zIndex: 1000}} 
-    className="fixed top-0 left-0 right-0 flex flex-row justify-between items-center px-6 py-4 
-    text-text-primary bg-bg-primary h-16 shadow-md"
+    className="fixed top-0 left-0 right-0 flex flex-row justify-between items-center px-10 py-4 
+    text-text-primary bg-bg-primary h-16 shadow-[0_4px_6px_rgba(0,0,0,0.3)]"
     id="navigation-container">
     
     {/* Left side - Main Navigation */}
     <div className="flex flex-row items-center space-x-6">
-        <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-            <AiOutlineHome className="text-2xl" />
+        <Link to="/" className="cursor-pointer">
+            <div className="w-20 h-12 bg-black rounded-lg flex items-center justify-center">
+                <span className="text-white text-xs font-bold">Logo</span>
+            </div>
+        </Link>
+        <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
             <span className="text-lg">Home</span>
         </Link>
-        <Link to="/shop" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-            <AiOutlineShopping className="text-2xl" />
+        <Link to="/shop" className="flex items-center hover:opacity-80 transition-opacity">
             <span className="text-lg">Shop</span>
         </Link>
-        <Link to="/cart" className="flex items-center space-x-2 hover:opacity-80 transition-opacity relative">
-            <AiOutlineShoppingCart className="text-2xl" />
+        <Link to="/cart" className="flex items-center hover:opacity-80 transition-opacity relative">
             <span className="text-lg">Cart</span>
             <CartCount/>
         </Link>
-        <Link to="/favorite" className="flex items-center space-x-2 hover:opacity-80 transition-opacity relative">
-            <FaHeart className="text-2xl" />
+        <Link to="/favorite" className="flex items-center hover:opacity-80 transition-opacity relative">
             <span className="text-lg">Favorite</span>
             <FavoritesCount/>
+        </Link>
+        <Link to="/contact" className="flex items-center hover:opacity-80 transition-opacity">
+            <span className="text-lg">Contact</span>
         </Link>
     </div>
 
@@ -172,9 +174,8 @@ const Navigation = () => {
             <div className="flex items-center space-x-4">
                 <Link 
                     to="/auth" 
-                    className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
+                    className="flex items-center hover:opacity-80 transition-opacity"
                 >
-                    <AiOutlineLogin className="text-2xl" />
                     <span className="text-lg">Login</span>
                 </Link>
             </div>
