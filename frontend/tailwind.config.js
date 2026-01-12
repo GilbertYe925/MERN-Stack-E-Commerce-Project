@@ -10,6 +10,7 @@ export default {
         'bg-primary': '#CCCCCC',
         'component': '#7B7b7b',
         'text-primary': '#000000',
+        'text-secondary': '#484848',
       },
       fontFamily: {
         'display-sc': ['Playfair Display SC', 'serif'],

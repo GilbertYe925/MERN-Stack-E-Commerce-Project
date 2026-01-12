@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loader from '../components/common/Loader';
+import FormInput from '../components/common/FormInput';
+import FormButton from '../components/common/FormButton';
 
 const Contact = () => {
   const [name, setName] = useState('');
@@ -45,64 +47,61 @@ const Contact = () => {
         </div>
       </Link>
       
-      <div className="bg-component rounded-3xl p-8 w-[45rem] h-[44rem] flex flex-col relative">
-        <h1 className="text-4xl font-bold mb-15 text-center mb-4 whitespace-nowrap">Contact Us</h1>
-        <form onSubmit={handleSubmit} className="flex flex-col items-center">
-          <div className="w-[28rem]">
-            <input
-              type="text"
-              id="name"
-              placeholder="Name*"
-              className="p-3 mb-5 border border-gray-300 rounded-2xl w-full bg-white text-text-primary"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              disabled={isSubmitting}
-            />
-            
-            <input
-              type="tel"
-              id="phone"
-              placeholder="Phone*"
-              className="p-3 mb-5 border border-gray-300 rounded-2xl w-full bg-white text-text-primary"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
-              disabled={isSubmitting}
-            />
-            
-            <input
-              type="email"
-              id="email"
-              placeholder="E-mail*"
-              className="p-3 mb-5 border border-gray-300 rounded-2xl w-full bg-white text-text-primary"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              disabled={isSubmitting}
-            />
-            
-            <textarea
-              id="comment"
-              placeholder="Comment*"
-              className="p-3 mb-5 border border-gray-300 rounded-2xl w-full bg-white text-text-primary resize-none"
-              rows={6}
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              required
-              disabled={isSubmitting}
-            />
-            
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full mt-4 bg-black text-white p-3 rounded-2xl border-black border hover:bg-white hover:text-black"
-            >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </button>
-          </div>
-          {isSubmitting && <Loader />}
-        </form>
+      <div className="bg-component rounded-3xl p-12 w-[72rem] h-[42.5rem] flex flex-col relative">
+        <div className="pt-[1.5rem] flex flex-col items-center">
+          <h1 className="text-5xl font-bold mb-[3.5rem] text-center whitespace-nowrap leading-[3.5rem]">Contact Us</h1>
+          <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
+            <div className="w-[43.5rem] space-y-5">
+              <FormInput
+                type="text"
+                id="name"
+                placeholder="Name*"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                disabled={isSubmitting}
+              />
+              
+              <FormInput
+                type="tel"
+                id="phone"
+                placeholder="Phone*"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+                disabled={isSubmitting}
+              />
+              
+              <FormInput
+                type="email"
+                id="email"
+                placeholder="E-mail*"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                disabled={isSubmitting}
+              />
+              
+              <FormInput
+                as="textarea"
+                id="comment"
+                placeholder="Comment*"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                required
+                disabled={isSubmitting}
+              />
+              
+              <FormButton
+                type="submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </FormButton>
+            </div>
+            {isSubmitting && <Loader />}
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -4,6 +4,8 @@
   --color-bg-primary: #CCCCCC;
   --color-component: #7B7b7b;
   --color-text-primary: #000000;
+  --color-text-secondary: #484848;
+  --color-placeholder: #6C6A6A;
   
   --font-display-sc: 'Playfair Display SC', serif;
   --font-display: 'Playfair Display', serif;
@@ -21,4 +23,8 @@ body {
 
 input, textarea {
   font-family: var(--font-display);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--color-placeholder);
 }

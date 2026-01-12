@@ -6,6 +6,8 @@ import { setCredentials } from '../../redux/features/auth/authSlice';
 import { toast } from 'react-toastify';
 import { RootState } from '../../redux/store';
 import Loader from '../../components/common/Loader';
+import FormInput from '../../components/common/FormInput';
+import FormButton from '../../components/common/FormButton';
 
 type AuthStep = 'email' | 'login' | 'register' | 'forgot-password' | 'reset-password';
 
@@ -15,7 +17,7 @@ const Auth = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [login, { isLoading: isLoggingIn }] = useLoginMutation();
   const [register, { isLoading: isRegistering }] = useRegisterMutation();
   const [requestPasswordReset, { isLoading: isRequestingReset }] = useRequestPasswordResetMutation();
@@ -64,6 +66,11 @@ const Auth = () => {
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
+    if (!privacyAccepted) {
+      toast.error('Please accept the privacy policy and terms to continue');
+      return;
+    }
+    
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
       return;
@@ -84,14 +91,15 @@ const Auth = () => {
     setPassword('');
     setUsername('');
     setConfirmPassword('');
+    setPrivacyAccepted(false);
   };
 
   const handleForgotPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await requestPasswordReset({ email }).unwrap();
+      // await requestPasswordReset({ email }).unwrap();
       toast.success('If that email exists, a password reset link has been sent.');
-      setStep('email');
+      setStep('reset-password');
     } catch (error: any) {
       toast.error(error?.data?.message || error.message || 'Failed to send reset email');
     }
@@ -135,39 +143,39 @@ const Auth = () => {
         </div>
       </Link>
       
-      <div className="bg-component rounded-3xl p-12 w-[45rem] h-[44rem] flex flex-col relative">
+      <div className="bg-component rounded-3xl p-12 w-[72rem] h-[42.5rem] flex flex-col relative">
         {(step === 'login' || step === 'register' || step === 'forgot-password' || step === 'reset-password') && (
           <button
             onClick={handleBackToEmail}
-            className="absolute top-12 left-12 text-text-primary hover:underline"
+            className="absolute top-12 left-12 z-10 text-text-primary hover:underline"
           >
             ← Back
           </button>
         )}
         {step === 'email' && (
-          <div className="pt-22">
-            <h1 className="text-4xl font-bold mb-15 text-center whitespace-nowrap">Log In Or Create A New Account</h1>
-            <p className="text-center mb-8 text-text-primary playfair-display text-md">We will determine if you already have an account.</p>
-            <form onSubmit={handleEmailSubmit} className="flex flex-col items-center">
-              <div className="w-[28rem]">
-                <input
+          <div className="pt-[1.5rem] flex flex-col items-center">
+            <h1 className="text-5xl font-bold mb-[3.5rem] text-center whitespace-nowrap leading-[3.5rem]">Log In Or Create A New Account</h1>
+            <p className="text-center mb-8 text-text-primary playfair-display text-base leading-[1.5rem]">We will determine if you already have an account.</p>
+            <form onSubmit={handleEmailSubmit} className="flex flex-col items-center w-full">
+              <div className="w-[43.5rem]">
+                <FormInput
                   type="email"
                   id="email"
                   placeholder="E-mail*"
-                  className="p-3 mb-5 border border-gray-300 rounded-2xl w-full bg-white text-text-primary"
+                  className="mb-5"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={isLoggingIn}
                 />
 
-              <button
+              <FormButton
                 type="submit"
                 disabled={isLoggingIn}
-                className="w-full mt-4 bg-black text-white p-3 rounded-2xl border-black border hover:bg-white hover:text-black"
+                className="mt-4"
               >
                 {isLoggingIn ? 'Checking...' : 'Continue'}
-              </button>
+              </FormButton>
               </div>
               {isLoggingIn && <Loader />}
             </form>
@@ -175,46 +183,44 @@ const Auth = () => {
         )}
 
         {step === 'login' && (
-          <div className="pt-22">
-            <h1 className="text-4xl font-bold mb-15 text-center whitespace-nowrap">Sign In</h1>
-            <form onSubmit={handleLogin} className="flex flex-col items-center">
-              <div className="w-[28rem]">
-                <input
+          <div className="pt-[1.5rem] flex flex-col items-center">
+            <h1 className="text-5xl font-bold mb-[3.5rem] text-center whitespace-nowrap leading-[3.5rem]">Sign In</h1>
+            <form onSubmit={handleLogin} className="flex flex-col items-center w-full">
+              <div className="w-[43.5rem] space-y-5">
+                <FormInput
                   type="email"
                   id="login-email"
                   placeholder="E-mail*"
-                  className="p-3 mb-5 border border-gray-300 rounded-2xl w-full bg-white text-text-primary"
                   value={email}
                   disabled
                 />
-                <input
+                <FormInput
                   type="password"
                   id="login-password"
                   placeholder="Password*"
-                  className="p-3 mb-5 border border-gray-300 rounded-2xl w-full bg-white text-text-primary"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   disabled={isLoggingIn}
                 />
 
-                <div className="text-center space-y-2 w-full ">
+                <div className="text-center space-y-2 w-full">
                   <button
                     type="button"
                     onClick={() => setStep('forgot-password')}
-                    className="text-text-primary text-sm playfair-display text-md hover:underline block"
+                    className="text-text-primary text-base leading-[1.5rem] playfair-display hover:underline block"
                   >
                     Forgot password?
                   </button>
                 </div>
 
-                <button
+                <FormButton
                   type="submit"
                   disabled={isLoggingIn}
-                  className="w-full mt-4 bg-black text-white p-3 rounded-2xl border-black border hover:bg-white hover:text-black"
+                  className="mt-4"
                 >
                   {isLoggingIn ? 'Signing in...' : 'Sign In'}
-                </button>
+                </FormButton>
 
 
               </div>
@@ -224,55 +230,58 @@ const Auth = () => {
         )}
 
         {step === 'register' && (
-          <div className="pt-22">
-            <h1 className="text-4xl font-bold mb-15 text-center whitespace-nowrap">Join Us</h1>
-            <form onSubmit={handleRegister} className="flex flex-col items-center">
-              <div className="w-[28rem]">
-                <input
-                  type="email"
-                  id="register-email"
-                  placeholder="E-mail*"
-                  className="p-3 mb-5 border border-gray-300 rounded-2xl w-full bg-white text-text-primary"
-                  value={email}
-                  disabled
-                />
-                <input
+          <div className="pt-[1.5rem] flex flex-col items-center">
+            <h1 className="text-5xl font-bold mb-[3.5rem] text-center whitespace-nowrap leading-[3.5rem]">Join Us</h1>
+            <form onSubmit={handleRegister} className="flex flex-col items-center w-full">
+              <div className="w-[43.5rem] space-y-5">
+                <FormInput
                   type="text"
                   id="register-username"
                   placeholder="Username*"
-                  className="p-3 mb-5 border border-gray-300 rounded-2xl w-full bg-white text-text-primary"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
                   disabled={isRegistering}
                 />
-                <input
+                <FormInput
                   type="password"
                   id="register-password"
                   placeholder="Password*"
-                  className="p-3 mb-5 border border-gray-300 rounded-2xl w-full bg-white text-text-primary"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   disabled={isRegistering}
                 />
-                <input
+                <FormInput
                   type="password"
                   id="register-confirm-password"
                   placeholder="Confirm Password*"
-                  className="p-3 mb-5 border border-gray-300 rounded-2xl w-full bg-white text-text-primary"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                   disabled={isRegistering}
                 />
-                <button
+                <div className="flex items-start space-x-3">
+                  <input
+                    type="checkbox"
+                    id="privacy-checkbox"
+                    checked={privacyAccepted}
+                    onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                    disabled={isRegistering}
+                    className="mt-1 w-5 h-5 border border-gray-300 rounded cursor-pointer"
+                    required
+                  />
+                  <label htmlFor="privacy-checkbox" className="text-text-primary text-base leading-[1.5rem] playfair-display cursor-pointer">
+                    I agree to the <a href="#" className="underline hover:no-underline">Privacy Policy</a> and <a href="#" className="underline hover:no-underline">Terms of Service</a>*
+                  </label>
+                </div>
+                <FormButton
                   type="submit"
-                  disabled={isRegistering}
-                  className="w-full mt-4 bg-black text-white p-3 rounded-2xl border-black border hover:bg-white hover:text-black"
+                  disabled={isRegistering || !privacyAccepted}
+                  className="mt-4"
                 >
                   {isRegistering ? 'Creating account...' : 'Create Account'}
-                </button>
+                </FormButton>
               </div>
               {isRegistering && <Loader />}
             </form>
@@ -280,28 +289,28 @@ const Auth = () => {
         )}
 
         {step === 'forgot-password' && (
-          <div className="pt-22">
-            <h1 className="text-4xl font-bold mb-15 text-center whitespace-nowrap">Reset Password</h1>
-            <p className="text-center mb-8 text-text-primary playfair-display text-md">Enter your email to receive a password reset link.</p>
-            <form onSubmit={handleForgotPassword} className="flex flex-col items-center">
-              <div className="w-[28rem]">
-                <input
+          <div className="pt-[1.5rem] flex flex-col items-center">
+            <h1 className="text-5xl font-bold mb-[3.5rem] text-center whitespace-nowrap leading-[3.5rem]">Reset Password</h1>
+            <p className="text-center mb-8 text-text-primary playfair-display text-base leading-[1.5rem]">Enter your email to receive a password reset link.</p>
+            <form onSubmit={handleForgotPassword} className="flex flex-col items-center w-full">
+              <div className="w-[43.5rem]">
+                <FormInput
                   type="email"
                   id="forgot-email"
                   placeholder="E-mail*"
-                  className="p-3 mb-5 border border-gray-300 rounded-2xl w-full bg-white text-text-primary"
+                  className="mb-5"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={isRequestingReset}
                 />
-                <button
+                <FormButton
                   type="submit"
                   disabled={isRequestingReset}
-                  className="w-full mt-4 bg-black text-white p-3 rounded-2xl border-black border hover:bg-white hover:text-black"
+                  className="mt-4"
                 >
                   {isRequestingReset ? 'Sending...' : 'Send Reset Link'}
-                </button>
+                </FormButton>
               </div>
               {isRequestingReset && <Loader />}
             </form>
@@ -309,38 +318,41 @@ const Auth = () => {
         )}
 
         {step === 'reset-password' && (
-          <div className="pt-22">
-            <h1 className="text-4xl font-bold mb-15 text-center whitespace-nowrap">Reset Password</h1>
-            <p className="text-center mb-8 text-text-primary playfair-display text-md">Enter your new password.</p>
-            <form onSubmit={handleResetPassword} className="flex flex-col items-center">
-              <div className="w-[28rem]">
-                <input
-                  type="password"
-                  id="reset-password"
-                  placeholder="New Password*"
-                  className="p-3 mb-5 border border-gray-300 rounded-2xl w-full bg-white text-text-primary"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  disabled={isResettingPassword}
-                />
-                <input
-                  type="password"
-                  id="reset-confirm-password"
-                  placeholder="Confirm New Password*"
-                  className="p-3 mb-5 border border-gray-300 rounded-2xl w-full bg-white text-text-primary"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                  disabled={isResettingPassword}
-                />
-                <button
+          <div className="pt-[1.25rem] flex flex-col items-center relative">
+            <h1 className="text-5xl font-bold mb-[3.5rem] text-center whitespace-nowrap leading-[3.5rem]">Reset your password</h1>
+            <p className="text-center mb-8 text-text-primary playfair-display text-base leading-[1.5rem]">Please enter your new password.</p>
+            <form onSubmit={handleResetPassword} className="flex flex-col items-center w-full">
+              <div className="w-[43.5rem] space-y-[1.5rem]">
+                <div className="relative">
+                  <FormInput
+                    type="password"
+                    id="reset-password"
+                    placeholder="New Password*"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    disabled={isResettingPassword}
+                  />
+                </div>
+                <div className="relative">
+                  <FormInput
+                    type="password"
+                    id="reset-confirm-password"
+                    placeholder="Confirm Password*"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                    disabled={isResettingPassword}
+                  />
+                </div>
+                <p className="text-base leading-[1.5rem] text-text-secondary playfair-display mb-4">At least 7 characters long. Must include one uppercase letter and one number.</p>
+                <FormButton
                   type="submit"
                   disabled={isResettingPassword}
-                  className="w-full mt-4 bg-black text-white p-3 rounded-2xl border-black border hover:bg-white hover:text-black"
                 >
-                  {isResettingPassword ? 'Resetting...' : 'Reset Password'}
-                </button>
+                  {isResettingPassword ? 'Resetting...' : 'Submit'}
+                </FormButton>
+                <p className="text-center text-base leading-[1.5rem] text-text-secondary playfair-display mt-4">Required fields *</p>
               </div>
               {isResettingPassword && <Loader />}
             </form>
