@@ -12,6 +12,49 @@
   --font-display: 'Playfair Display', serif;
 }
 
+
+/* Apply scaling wrapper class for home page */
+/* This scales everything: text, images, positions, spacing, etc. */
+/* The container is always 1920px wide (design width), then scaled down via JavaScript */
+.scale-wrapper {
+  width: 1920px;
+  transform-origin: top left;
+  position: relative;
+  /* Ensure the container doesn't cause horizontal scroll */
+  overflow-x: hidden;
+  /* Let container height be determined by its children */
+  min-height: auto;
+}
+
+/* Make sections use fixed design height (1080px) */
+/* Heights are set via JavaScript in Home.tsx to always be 1080px (base design height) */
+/* The scaleFactor handles proportional scaling of the entire container */
+/* Override Tailwind's h-screen class */
+.scale-wrapper section {
+  /* Height is always 1080px (base design height) before scaling */
+  /* After scaling by scaleFactor, it will appear proportionally smaller */
+  /* Fallback to 1080px if JS hasn't run yet */
+  height: var(--section-height, 1080px) !important;
+  min-height: var(--section-height, 1080px) !important;
+  max-height: var(--section-height, 1080px) !important;
+}
+/* Ensure html and body handle overflow correctly */
+html {
+  overflow-x: hidden;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  min-height: 100%;
+}
+
 body {
   font-family: var(--font-display-sc);
   background-color: var(--color-bg-primary);

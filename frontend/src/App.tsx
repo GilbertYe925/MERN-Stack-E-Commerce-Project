@@ -7,12 +7,13 @@ const App = () => {
   const location = useLocation();
   const hideNavbarPaths = ['/auth', '/contact', '/profile', '/user-orders', '/reset-password', '/'];
   const showNavbar = !hideNavbarPaths.includes(location.pathname);
+  const isHomePage = location.pathname === '/';
 
   return (
     <div>
       <ToastContainer />
       {showNavbar && <Navigation />}
-      <main className={showNavbar ? "py-3 pt-20" : "py-3"}>
+      <main className={showNavbar ? (isHomePage ? "pt-20" : "py-3 pt-20") : (isHomePage ? "" : "py-3")} style={isHomePage ? { height: 'auto', minHeight: 'auto' } : {}}>
         <Outlet />
       </main>
     </div>
