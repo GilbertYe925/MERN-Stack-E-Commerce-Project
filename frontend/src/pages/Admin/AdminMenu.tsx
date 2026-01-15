@@ -34,53 +34,47 @@ const AdminMenu = () => {
                         <li>
                             <NavLink 
                             to="/admin/dashboard" 
-                            className="list-item py-2 px-3 block mb-5 hover:bg-white hover:text-[#2E2D2D]
-                             rounded-sm" 
-                             style={({isActive}) => ({color: isActive ? 'greenyellow' : 'white'})}>
+                            className={({isActive}) => `list-item py-2 px-3 block mb-5 hover:bg-white hover:text-[#2E2D2D]
+                             rounded-sm ${isActive ? 'text-greenyellow' : 'text-white'}`}>
                                 Admin Dashboard
                             </NavLink>
                         </li>
                         <li>
                             <NavLink 
                             to="/admin/categorylist" 
-                            className="list-item py-2 px-3 block mb-5 hover:bg-white hover:text-[#2E2D2D]
-                             rounded-sm" 
-                             style={({isActive}) => ({color: isActive ? 'greenyellow' : 'white'})}>
+                            className={({isActive}) => `list-item py-2 px-3 block mb-5 hover:bg-white hover:text-[#2E2D2D]
+                             rounded-sm ${isActive ? 'text-greenyellow' : 'text-white'}`}>
                                 Create Category
                             </NavLink>
                         </li>
                         <li>
                             <NavLink 
                             to="/admin/productlist/1" 
-                            className="list-item py-2 px-3 block mb-5 hover:bg-white hover:text-[#2E2D2D]
-                             rounded-sm" 
-                             style={({isActive}) => ({color: isActive ? 'greenyellow' : 'white'})}>
+                            className={({isActive}) => `list-item py-2 px-3 block mb-5 hover:bg-white hover:text-[#2E2D2D]
+                             rounded-sm ${isActive ? 'text-greenyellow' : 'text-white'}`}>
                                 Create Product
                             </NavLink>
                         </li>
                         <li>
                             <NavLink 
                             to="/admin/allproducts" 
-                            className="list-item py-2 px-3 block mb-5 hover:bg-white hover:text-[#2E2D2D]
-                             rounded-sm" 
-                             style={({isActive}) => ({color: isActive ? 'greenyellow' : 'white'})}>
+                            className={({isActive}) => `list-item py-2 px-3 block mb-5 hover:bg-white hover:text-[#2E2D2D]
+                             rounded-sm ${isActive ? 'text-greenyellow' : 'text-white'}`}>
                                 All Products
                             </NavLink>
                         </li>
                         <li>
                             <NavLink 
                             to="/admin/userlist" 
-                            className="list-item py-2 px-3 block mb-5 hover:bg-white hover:text-[#2E2D2D]
-                             rounded-sm" 
-                             style={({isActive}) => ({color: isActive ? 'greenyellow' : 'white'})}>
+                            className={({isActive}) => `list-item py-2 px-3 block mb-5 hover:bg-white hover:text-[#2E2D2D]
+                             rounded-sm ${isActive ? 'text-greenyellow' : 'text-white'}`}>
                                 Manage Users
                             </NavLink>
                         </li>                        <li>
                             <NavLink 
                             to="/admin/orderlist" 
-                            className="list-item py-2 px-3 block mb-5 hover:bg-white hover:text-[#2E2D2D]
-                             rounded-sm" 
-                             style={({isActive}) => ({color: isActive ? 'greenyellow' : 'white'})}>
+                            className={({isActive}) => `list-item py-2 px-3 block mb-5 hover:bg-white hover:text-[#2E2D2D]
+                             rounded-sm ${isActive ? 'text-greenyellow' : 'text-white'}`}>
                                 Manage Orders
                             </NavLink>
                         </li>

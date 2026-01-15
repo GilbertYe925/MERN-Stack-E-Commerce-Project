@@ -34,9 +34,8 @@ const Navigation = () => {
 
   return (
     <nav 
-    style={{zIndex: 1000}} 
     className="fixed top-0 left-0 right-0 flex flex-row justify-between items-center px-10 py-4 
-    text-text-primary bg-bg-primary h-16 shadow-[0_4px_6px_rgba(0,0,0,0.3)]"
+    text-text-primary bg-bg-primary h-16 shadow-nav z-[1000]"
     id="navigation-container">
     
     {/* Left side - Main Navigation */}
@@ -94,7 +93,7 @@ const Navigation = () => {
                 {dropdownOpen && (
                     <ul 
                         className="absolute top-full right-0 mt-2 space-y-2 bg-white 
-                        text-gray-600 rounded-md shadow-lg py-2 min-w-[180px] z-50"
+                        text-gray-600 rounded-md shadow-dropdown py-2 min-w-[180px] z-50"
                     >
                         {userInfo.isAdmin && (
                             <>

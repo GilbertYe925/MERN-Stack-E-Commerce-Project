@@ -24,10 +24,9 @@ const ProductCard = ({p}: {p: any}) => {
                 {p?.brand}
               </span>
               <img
-                className="cursor-pointer w-full"
+                className="cursor-pointer w-full h-[170px] object-cover"
                 src={p.image}
                 alt={p.name}
-                style={{ height: "170px", objectFit: "cover" }}
               />
             </Link>
             <HeartIcon product={p} />

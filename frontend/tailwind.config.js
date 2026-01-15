@@ -11,10 +11,15 @@ export default {
         'component': '#7B7b7b',
         'text-primary': '#000000',
         'text-secondary': '#484848',
+        'white': '#FFFFFF',
+        'greenyellow': 'greenyellow',
       },
       fontFamily: {
         'display-sc': ['Playfair Display SC', 'serif'],
         'display': ['Playfair Display', 'serif'],
+      },
+      backgroundImage: {
+        'footer-bg': 'url("/src/public/footer.png")',
       },
     },
   },

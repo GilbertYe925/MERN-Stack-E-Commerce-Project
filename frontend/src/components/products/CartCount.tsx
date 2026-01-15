@@ -7,7 +7,7 @@ const CartCount = () => {
   return (
     <>
       {cartCount > 0 && (
-        <span className='absolute -top-2 -right-2 text-xs text-white bg-pink-500 rounded-full px-1.5 py-0.5 min-w-[20px] text-center'>
+        <span className='absolute -top-2 -right-2 text-xs text-black bg-white border border-black rounded-full px-1.5 py-0.5 min-w-[20px] text-center'>
           {cartCount}
         </span>
       )}
