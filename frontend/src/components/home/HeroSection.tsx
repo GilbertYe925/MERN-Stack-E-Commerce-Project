@@ -23,18 +23,18 @@ const HeroSection = () => {
       {/* Main content container */}
       <div className="relative z-10 flex items-center justify-between px-[2rem] pt-[1.5rem]">
         {/* Left side - Text content */}
-        <div className="flex flex-col gap-[1.5rem] max-w-[41rem] mt-[25rem]">
-          <h2 className="text-5xl leading-[4rem] text-white">
+        <div className="flex flex-col gap-[1.5rem] max-w-[36rem] mt-[26rem]">
+          <h2 className="text-[2.5rem] leading-[4rem] text-white">
             Auren Luxury - Jewelry shaped by fortune
           </h2>
           
-          <p className="text-2xl leading-[2rem] text-black font-normal playfair-display max-w-[41rem] mb-[1rem]">
+          <p className="text-[1.25rem] leading-[2rem] text-black font-normal playfair-display max-w-[34rem] mb-[1rem]">
             Crafted with care, our jewelry is designed to carry intention and quiet fortune. Each piece serves as a symbol of hope, timing, and the belief that good things find their way.
           </p>
           
           <Link 
             to="/shop"
-            className="w-[11rem] h-[5rem] bg-white rounded-4xl flex items-center justify-center text-[1.5rem] leading-[2rem] text-text-primary font-normal hover:bg-text-primary hover:text-white transition-all shadow-button"
+            className="w-[11rem] h-[5rem] bg-white rounded-4xl flex items-center justify-center text-[1.5rem] text-text-primary font-normal hover:bg-text-primary hover:text-white transition-all shadow-button text-center"
           >
             Shop Now
           </Link>

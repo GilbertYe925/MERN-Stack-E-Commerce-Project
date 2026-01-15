@@ -56,7 +56,7 @@ const HomeNavigation = () => {
             <img 
               src={buttonsImage} 
               alt="Shopping cart" 
-              className="w-full h-full object-cover group-hover:invert transition-all"
+              className="w-full h-full object-cover invert group-hover:invert-0 transition-all"
             />
             <CartCount />
           </Link>

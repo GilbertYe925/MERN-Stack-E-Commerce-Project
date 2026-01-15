@@ -13,18 +13,18 @@ const CategorySection = () => {
   ]
 
   return (
-    <section className="w-full h-screen bg-[#CCCCCC] flex items-center">
+    <section className="w-full h-screen bg-[#CCCCCC] flex items-start pt-[5rem]">
       <div className="max-w-[90rem] mx-auto w-full">
-        <h2 className="text-[4.5rem] text-black font-normal text-center mb-[10rem] text-shadow-default">
+        <h2 className="text-[3.75rem] text-black font-normal text-center mb-[5rem] text-shadow-default">
           Shop By Category
         </h2>
         
-        <div className="flex justify-center items-start gap-[7rem] px-[2rem]">
+        <div className="flex justify-center items-start gap-[7rem]">
           {categories.map((category, index) => (
             <div key={index} className="flex flex-col items-center">
               <Link 
                 to="/shop" 
-                className="w-[24rem] h-[30rem] overflow-hidden rounded-lg hover:opacity-90 transition-opacity relative"
+                className="w-[21rem] h-[26rem] overflow-hidden rounded-lg hover:opacity-90 transition-opacity relative"
               >
                 <img 
                   src={category.image} 
@@ -33,7 +33,7 @@ const CategorySection = () => {
                 />
               </Link>
               <div className="mt-[2rem] text-center">
-                <h3 className="text-[2rem] leading-[2rem] text-black font-normal">
+                <h3 className="text-[1.75rem] leading-[2rem] text-black font-normal">
                   {category.name}
                 </h3>
               </div>

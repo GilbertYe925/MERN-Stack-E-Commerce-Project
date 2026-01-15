@@ -6,7 +6,7 @@ const CollectionShowcase = () => {
     <section className="relative w-full h-screen bg-[#7B7B7B] overflow-hidden">
       
       {/* Left product image */}
-      <div className="absolute left-[9rem] top-[2rem] w-[34rem] h-[34rem]">
+      <div className="absolute left-[6rem] top-[3rem] w-[32rem] h-[32rem]">
         <img 
           src={col1} 
           alt="Collection Item 1"
@@ -15,7 +15,7 @@ const CollectionShowcase = () => {
       </div>
 
       {/* Right product image */}
-      <div className="absolute right-[6rem] top-[23rem] w-[34rem] h-[34rem]">
+      <div className="absolute right-[3rem] top-[21rem] w-[32rem] h-[32rem]">
         <img 
           src={col2} 
           alt="Collection Item 2"
@@ -24,25 +24,25 @@ const CollectionShowcase = () => {
       </div>
 
       {/* "Our New" text */}
-      <div className="absolute left-[40rem] top-[18rem]">
-        <h2 className="text-[5rem] text-black font-bold text-shadow-default">
+      <div className="absolute left-[35.5rem] top-[17rem]">
+        <h2 className="text-[4.75rem] text-black font-bold text-shadow-default">
           Our New
         </h2>
       </div>
 
       {/* "Collection" text */}
-      <div className="absolute right-[36rem] top-[27rem]">
-        <h2 className="text-[6.5rem] leading-[7rem] text-white font-bold text-shadow-default">
+      <div className="absolute right-[31.5rem] top-[25rem]">
+        <h2 className="text-[6rem] leading-[7rem] text-white font-bold text-shadow-default">
           Collection
         </h2>
       </div>
 
       {/* Description text */}
-      <div className="absolute left-[29rem] bottom-[22rem] flex flex-col">
-        <p className="text-[2.5rem] text-[#333333] font-normal">
+      <div className="absolute left-[25rem] bottom-[18rem] flex flex-col">
+        <p className="text-[2rem] text-[#333333] font-normal">
           Discover Timeless Elegance
         </p>
-        <p className="text-[2.5rem] text-[#333333] font-normal -translate-x-[2.5rem]">
+        <p className="text-[2rem] text-[#333333] font-normal -translate-x-[2.5rem]">
           with our shinning new collection
         </p>
       </div>
