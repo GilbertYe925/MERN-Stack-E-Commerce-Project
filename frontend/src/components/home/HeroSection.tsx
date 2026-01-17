@@ -8,7 +8,7 @@ import starImage from '../../public/star.png'
 const HeroSection = () => {
   return (
     <section
-      className="relative w-full h-screen bg-[#7B7B7B] overflow-hidden"
+      className="relative w-full h-screen bg-component overflow-hidden"
     >
       <HomeNavigation />
 

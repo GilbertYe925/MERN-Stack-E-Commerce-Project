@@ -34,33 +34,33 @@ const Navigation = () => {
 
   return (
     <nav 
-    className="fixed top-0 left-0 right-0 flex flex-row justify-between items-center px-10 py-4 
-    text-text-primary bg-bg-primary h-16 shadow-nav z-[1000]"
+    className="fixed top-0 left-0 right-0 flex flex-row justify-between items-center px-4 md:px-6 lg:px-10 
+    py-2 md:py-3 text-text-primary bg-bg-primary h-20 shadow-nav z-[1000]"
     id="navigation-container">
     
     {/* Left side - Main Navigation */}
-    <div className="flex flex-row items-center space-x-6">
+    <div className="flex flex-row items-center space-x-4 md:space-x-6 lg:space-x-8">
         <Link to="/" className="cursor-pointer">
-            <div className="w-20 h-12 bg-black rounded-lg flex items-center justify-center">
-                <span className="text-white text-xs font-bold">Logo</span>
+            <div className="w-16 h-14 md:w-16 md:h-12 lg:w-24 lg:h-18 bg-black rounded-lg 
+              flex items-center justify-center">
+                <span className="text-white text-[0.625rem] md:text-[0.75rem] font-bold">Logo</span>
             </div>
         </Link>
         <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
-            <span className="text-lg">Home</span>
+            <span className="text-sm md:text-base">Home</span>
         </Link>
         <Link to="/shop" className="flex items-center hover:opacity-80 transition-opacity">
-            <span className="text-lg">Shop</span>
+            <span className="text-sm md:text-base">Shop</span>
         </Link>
         <Link to="/cart" className="flex items-center hover:opacity-80 transition-opacity relative">
-            <span className="text-lg">Cart</span>
+            <span className="text-sm md:text-base">Cart</span>
             <CartCount/>
         </Link>
         <Link to="/favorite" className="flex items-center hover:opacity-80 transition-opacity relative">
-            <span className="text-lg">Favorite</span>
-            <FavoritesCount/>
+            <span className="text-sm md:text-base hidden sm:inline">Favorite</span>
         </Link>
         <Link to="/contact" className="flex items-center hover:opacity-80 transition-opacity">
-            <span className="text-lg">Contact</span>
+            <span className="text-sm md:text-base hidden md:inline">Contact</span>
         </Link>
     </div>
 
@@ -70,12 +70,13 @@ const Navigation = () => {
             <>
                 <button 
                     onClick={toggleDropdown} 
-                    className='flex items-center space-x-2 focus:outline-none hover:opacity-80 transition-opacity'
+                    className='flex items-center space-x-1 md:space-x-2 focus:outline-none 
+                      hover:opacity-80 transition-opacity'
                 >
-                    <span className='text-lg'>{userInfo.username}</span>
+                    <span className='text-sm md:text-base'>{userInfo.username}</span>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className={`h-4 w-4 ${
+                        className={`h-3 w-3 md:h-4 md:w-4 ${
                             dropdownOpen ? "transform rotate-180" : ""
                         } transition-transform`}
                         fill="none"
@@ -92,15 +93,16 @@ const Navigation = () => {
                 </button>
                 {dropdownOpen && (
                     <ul 
-                        className="absolute top-full right-0 mt-2 space-y-2 bg-white 
-                        text-gray-600 rounded-md shadow-dropdown py-2 min-w-[180px] z-50"
+                        className="absolute top-full right-0 mt-2 space-y-1 md:space-y-2 bg-white 
+                        text-gray-600 rounded-md shadow-dropdown py-1 md:py-2 min-w-[140px] 
+                        md:min-w-[180px] z-50 text-sm md:text-base"
                     >
                         {userInfo.isAdmin && (
                             <>
                                 <li>
                                     <Link 
                                         to="/admin/dashboard" 
-                                        className="block px-4 py-2 hover:bg-gray-100"
+                                        className="block px-3 md:px-4 py-1.5 md:py-2 hover:bg-gray-100"
                                         onClick={() => setDropdownOpen(false)}
                                     >
                                         Dashboard
@@ -109,7 +111,7 @@ const Navigation = () => {
                                 <li>
                                     <Link 
                                         to="/admin/productlist/1" 
-                                        className="block px-4 py-2 hover:bg-gray-100"
+                                        className="block px-3 md:px-4 py-1.5 md:py-2 hover:bg-gray-100"
                                         onClick={() => setDropdownOpen(false)}
                                     >
                                         Products
@@ -118,7 +120,7 @@ const Navigation = () => {
                                 <li>
                                     <Link 
                                         to="/admin/categorylist" 
-                                        className="block px-4 py-2 hover:bg-gray-100"
+                                        className="block px-3 md:px-4 py-1.5 md:py-2 hover:bg-gray-100"
                                         onClick={() => setDropdownOpen(false)}
                                     >
                                         Category
@@ -127,7 +129,7 @@ const Navigation = () => {
                                 <li>
                                     <Link 
                                         to="/admin/orderlist" 
-                                        className="block px-4 py-2 hover:bg-gray-100"
+                                        className="block px-3 md:px-4 py-1.5 md:py-2 hover:bg-gray-100"
                                         onClick={() => setDropdownOpen(false)}
                                     >
                                         Orders
@@ -136,7 +138,7 @@ const Navigation = () => {
                                 <li>
                                     <Link 
                                         to="/admin/userlist" 
-                                        className="block px-4 py-2 hover:bg-gray-100"
+                                        className="block px-3 md:px-4 py-1.5 md:py-2 hover:bg-gray-100"
                                         onClick={() => setDropdownOpen(false)}
                                     >
                                         Users
@@ -147,7 +149,7 @@ const Navigation = () => {
                         <li>
                             <Link 
                                 to="/profile" 
-                                className="block px-4 py-2 hover:bg-gray-100"
+                                className="block px-3 md:px-4 py-1.5 md:py-2 hover:bg-gray-100"
                                 onClick={() => setDropdownOpen(false)}
                             >
                                 Profile
@@ -161,7 +163,7 @@ const Navigation = () => {
                                     logoutHandler()
                                     setDropdownOpen(false)
                                 }}
-                                className="block px-4 py-2 hover:bg-gray-100"
+                                className="block px-3 md:px-4 py-1.5 md:py-2 hover:bg-gray-100"
                             >
                                 Logout
                             </Link>
@@ -170,12 +172,12 @@ const Navigation = () => {
                 )}
             </>
         ) : (
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 md:space-x-4">
                 <Link 
                     to="/auth" 
                     className="flex items-center hover:opacity-80 transition-opacity"
                 >
-                    <span className="text-lg">Login</span>
+                    <span className="text-sm md:text-base">Login</span>
                 </Link>
             </div>
         )}

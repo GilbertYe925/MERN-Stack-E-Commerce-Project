@@ -4,7 +4,7 @@ import col2 from '../../public/col2.png'
 const CollectionShowcase = () => {
   return (
     <section
-      className="relative w-full h-screen bg-[#7B7B7B] overflow-x-hidden overflow-y-auto"
+      className="relative w-full h-screen bg-component overflow-x-hidden overflow-y-auto"
     >
       {/* Left product image */}
       <div

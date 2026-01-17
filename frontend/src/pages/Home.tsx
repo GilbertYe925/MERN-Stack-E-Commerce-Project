@@ -43,10 +43,14 @@ const Home = () => {
         
         sections.forEach((section) => {
           const sectionElement = section as HTMLElement
+          // Check if section should have double height (e.g., NewArrivals with 8 products)
+          const hasDoubleRow = sectionElement.classList.contains('double-row-section')
+          const sectionHeightValue = hasDoubleRow ? sectionHeight * 1.5 : sectionHeight
+          
           // CSS already sets height via --section-height, but we set it directly to ensure it's applied
-          sectionElement.style.setProperty('height', `${sectionHeight}px`, 'important')
-          sectionElement.style.setProperty('min-height', `${sectionHeight}px`, 'important')
-          sectionElement.style.setProperty('max-height', `${sectionHeight}px`, 'important')
+          sectionElement.style.setProperty('height', `${sectionHeightValue}px`, 'important')
+          sectionElement.style.setProperty('min-height', `${sectionHeightValue}px`, 'important')
+          sectionElement.style.setProperty('max-height', `${sectionHeightValue}px`, 'important')
         })
         
         // Set parent container height to match scaled wrapper height
@@ -82,7 +86,7 @@ const Home = () => {
   return (
     <div 
       ref={wrapperRef}
-      className="scale-wrapper w-full bg-[#CCCCCC] overflow-x-hidden"
+      className="scale-wrapper w-full bg-primary overflow-x-hidden"
       style={{
         width: '1920px',
         position: 'relative'

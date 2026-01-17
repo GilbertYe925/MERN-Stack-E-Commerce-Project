@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-primary: #CCCCCC;
-  --color-component: #7B7b7b;
+  --color-bg-primary: #DDDDDD;
+  --color-component: #B3B3B3;
   --color-text-primary: #000000;
   --color-text-secondary: #484848;
   --color-placeholder: #6C6A6A;
   --color-white: #FFFFFF;
+  --color-details-bg: #7b7b7b;
   
   --font-display-sc: 'Playfair Display SC', serif;
   --font-display: 'Playfair Display', serif;

@@ -9,6 +9,7 @@ export default {
       colors: {
         'bg-primary': '#CCCCCC',
         'component': '#7B7b7b',
+        'details-bg': '#7b7b7b',
         'text-primary': '#000000',
         'text-secondary': '#484848',
         'white': '#FFFFFF',
