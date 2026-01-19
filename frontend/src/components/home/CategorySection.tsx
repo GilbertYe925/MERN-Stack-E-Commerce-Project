@@ -1,25 +1,19 @@
 import { Link } from 'react-router-dom'
-import cat1 from '../../public/cat1.png'
-import cat2 from '../../public/Cat2.png'
-import cat3 from '../../public/cat3.png'
-import cat4 from '../../public/cat4.png'
+import { HOME_CATEGORIES } from '../../config/categories'
 
 const CategorySection = () => {
-  const categories = [
-    { name: 'Fate', image: cat1 },
-    { name: 'Sign', image: cat2 },
-    { name: 'Omen', image: cat3 },
-    { name: 'Destiny', image: cat4 },
-  ]
+  const categories = HOME_CATEGORIES
 
   return (
     <section
-      className="w-full h-screen bg-primary flex items-start pt-[7rem] overflow-x-hidden"
+      data-section-id="category"
+      data-height-type="reduced"
+      className="w-full bg-primary flex items-start pt-[3rem] overflow-hidden"
     >
       <div className="max-w-[90rem] mx-auto w-full">
         <h2
-          className="text-[3.75rem] text-black font-normal text-center 
-            mb-[12rem] text-shadow-default"
+          className="text-[2.5rem] text-black font-normal text-center 
+            mb-[3rem] text-shadow-default"
         >
           Shop By Category
         </h2>

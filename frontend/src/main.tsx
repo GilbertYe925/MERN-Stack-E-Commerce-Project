@@ -27,7 +27,6 @@ import Favorites from './pages/Products/Favorites.tsx'
 import ProductDetails from './pages/Products/ProductDetails.tsx'
 import Cart from './pages/Cart.tsx'
 import Shop from './pages/Shop.tsx'
-import Shipping from './pages/Orders/Shipping.tsx'
 import PlaceOrder from './pages/Orders/PlaceOrder.tsx'
 import Order from './pages/Orders/Order.tsx'
 import { PayPalScriptProvider } from '@paypal/react-paypal-js'
@@ -49,7 +48,6 @@ const router = createBrowserRouter(
 
       <Route path="/" element={<PrivateRoute />} >
         <Route path='/profile' element={<Profile />} />
-        <Route path='/shipping' element={<Shipping />} />
         <Route path='/placeorder' element={<PlaceOrder />} />
         <Route path='/order/:id' element={<Order />} />
       </Route>

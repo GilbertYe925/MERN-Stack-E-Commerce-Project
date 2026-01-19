@@ -13,17 +13,19 @@ const NewArrivals = () => {
 
   return (
     <section
-      className={`w-full h-screen bg-component flex items-start pt-[7rem] overflow-hidden ${hasMultipleRows ? 'double-row-section' : ''}`}
+      data-section-id="new-arrival"
+      data-height-type="base"
+      className={`w-full bg-component flex items-start pt-[3rem] overflow-hidden ${hasMultipleRows ? 'double-row-section' : ''}`}
     >
-      <div className="max-w-[120rem] mx-auto w-full pb-[4rem]">
+      <div className="max-w-[120rem] mx-auto w-full">
         <h2
-          className="text-[3.75rem] text-black font-normal text-center mb-[12rem] text-shadow-default"
+          className="text-[2.5rem] text-black font-normal text-center mb-[3rem] text-shadow-default"
         >
           New Arrival
         </h2>
 
         <div
-          className="flex flex-wrap justify-center items-start gap-x-[4rem] gap-y-[4rem] px-[2rem]"
+          className="flex flex-wrap justify-center items-start gap-x-[4rem] gap-y-[2rem] pb-[2rem] px-[2rem]"
         >
           {newProducts.map((product: any, index: number) => (
             <ProductCard key={product._id || index} product={product} />

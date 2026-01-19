@@ -23,6 +23,7 @@
   position: relative;
   /* Ensure the container doesn't cause horizontal scroll */
   overflow-x: hidden;
+  overflow-y: visible;
   /* Let container height be determined by its children */
   min-height: auto;
 }
@@ -39,21 +40,43 @@
   min-height: var(--section-height, 1080px) !important;
   max-height: var(--section-height, 1080px) !important;
 }
-/* Ensure html and body handle overflow correctly */
+/* Ensure html and body handle overflow correctly - single scrollbar */
 html {
   overflow-x: hidden;
+  overflow-y: visible;
   width: 100%;
-  height: auto;
-  min-height: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   overflow-x: hidden;
+  overflow-y: auto;
   width: 100%;
   margin: 0;
   padding: 0;
   height: auto;
   min-height: 100%;
+}
+
+/* Ensure root and main don't create scrollbars */
+#root {
+  overflow-x: hidden;
+  overflow-y: visible;
+  width: 100%;
+  height: auto;
+}
+
+main {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* Ensure App wrapper doesn't create scrollbar */
+body > div {
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 body {

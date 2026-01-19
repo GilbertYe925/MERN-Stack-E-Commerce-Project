@@ -11,12 +11,14 @@ const FeaturedProducts = () => {
 
   return (
     <section
-      className="w-full h-screen bg-primary flex items-start pt-[7rem] overflow-x-hidden"
+      data-section-id="featured"
+      data-height-type="reduced"
+      className="w-full bg-primary flex items-start pt-[3rem] overflow-hidden"
     >
       <div className="max-w-[90rem] mx-auto w-full">
         <h2
-          className="text-[3.75rem] text-black font-normal text-center 
-            mb-[12rem] text-shadow-default"
+          className="text-[2.5rem] text-black font-normal text-center 
+            mb-[3rem] text-shadow-default"
         >
           Featured Products
         </h2>

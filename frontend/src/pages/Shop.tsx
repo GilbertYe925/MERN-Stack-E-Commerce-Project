@@ -7,7 +7,8 @@ import {useFetchCategoriesQuery} from '../redux/api/categoryApiSlice'
 import {setCategories, setProducts, setChecked, resetFilters} from '../redux/features/shop/shopSlice'
 
 import Loader from '../components/common/Loader'
-import ProductCard from './Products/ProductCard'
+import ProductCard from '../components/products/ProductCard'
+import { getUniqueBrands, filterProductsByBrand, filterProductsByPrice } from '../utils/productFilters'
 
 const Shop = () => {
     const dispatch = useDispatch()
@@ -15,6 +16,7 @@ const Shop = () => {
     const categoriesQuery = useFetchCategoriesQuery(undefined)
 
     const [priceFilter, setPriceFilter] = useState('')
+    const [selectedBrand, setSelectedBrand] = useState<string>('')
     const filteredProductsQuery = useGetFilteredProductsQuery({
         checked,
         radio,
@@ -27,20 +29,25 @@ const Shop = () => {
     }, [dispatch, categoriesQuery.data])
 
     useEffect(() => {
-        if (!checked.length || !radio.length) {
-            if (!filteredProductsQuery.isLoading && filteredProductsQuery.data) {
-                const filteredProducts = filteredProductsQuery.data.filter((product: any) => 
-                    product.price.toString().includes(priceFilter) || product.price === parseInt(priceFilter,10)
-                )
-                dispatch(setProducts(filteredProducts))
+        if (!filteredProductsQuery.isLoading && filteredProductsQuery.data) {
+            let filteredProducts = filteredProductsQuery.data
+            
+            // Apply brand filter if a brand is selected
+            if (selectedBrand) {
+                filteredProducts = filterProductsByBrand(filteredProducts, selectedBrand)
             }
+            
+            // Apply price filter
+            filteredProducts = filterProductsByPrice(filteredProducts, priceFilter)
+            
+            dispatch(setProducts(filteredProducts))
         }
-    }, [dispatch, filteredProductsQuery.data, checked, radio, priceFilter])
+    }, [dispatch, filteredProductsQuery.data, filteredProductsQuery.isLoading, checked, radio, priceFilter, selectedBrand])
 
 
     const handleBrandClick = (brand: string) => {
-        const productByBrand = filteredProductsQuery.data?.filter((p:any) => p.brand === brand)
-        dispatch(setProducts(productByBrand))
+        setSelectedBrand(brand)
+        // The useEffect will handle updating products when selectedBrand changes
     }
 
     const handleCheck = (value: boolean, id: string) => {
@@ -48,13 +55,7 @@ const Shop = () => {
         dispatch(setChecked(updatedChecked))
     }
 
-    const uniqueBrands = [
-        ...Array.from(
-            new Set(filteredProductsQuery.data?.map((p:any) => p.brand).filter(
-                (brand: string) => brand !== undefined
-            ))
-        )
-    ]
+    const uniqueBrands = getUniqueBrands(filteredProductsQuery.data)
 
     const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPriceFilter(e.target.value)
@@ -63,9 +64,7 @@ const Shop = () => {
     const handleReset = () => {
         dispatch(resetFilters())
         setPriceFilter('')
-        // Reset radio buttons
-        const radioButtons = document.querySelectorAll('input[type="radio"]') as NodeListOf<HTMLInputElement>
-        radioButtons.forEach(radio => radio.checked = false)
+        setSelectedBrand('')
     }
 
     
@@ -106,24 +105,23 @@ const Shop = () => {
 
             <div className="p-5">
                 {uniqueBrands?.map((brand: any) => (
-                <>
-                    <div className="flex items-enter mr-4 mb-5">
+                <div key={brand} className="flex items-enter mr-4 mb-5">
                     <input
                         type="radio"
                         id={brand}
                         name="brand"
+                        checked={selectedBrand === brand}
                         onChange={() => handleBrandClick(brand)}
                         className="w-4 h-4 text-pink-400 bg-gray-100 border-gray-300 focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     />
 
                     <label
-                        htmlFor="pink-radio"
+                        htmlFor={brand}
                         className="ml-2 text-sm font-medium text-white dark:text-gray-300"
                     >
                         {brand}
                     </label>
-                    </div>
-                </>
+                </div>
                 ))}
             </div>
 
@@ -159,7 +157,7 @@ const Shop = () => {
                 ) : (
               products?.map((p: any) => (
                 <div className="p-3" key={p._id}>
-                    <ProductCard p={p} />
+                    <ProductCard product={p} />
                     </div>
                 ))
                 )}

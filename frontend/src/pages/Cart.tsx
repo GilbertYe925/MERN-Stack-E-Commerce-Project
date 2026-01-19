@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { FaTrash } from "react-icons/fa";
 import { addToCart, removeFromCart } from "../redux/features/cart/cartSlice";
 import { RootState } from "../redux/store";
 import EmptyState from "../components/common/EmptyState";
@@ -21,12 +20,15 @@ const Cart = () => {
   };
 
   const checkoutHandler = () => {
-    navigate("/auth?redirect=/shipping");
+    navigate("/placeorder");
   };
 
+  const totalItems = cartItems.reduce((acc: number, item: any) => acc + item.quantity, 0);
+  const subtotal = cartItems.reduce((acc: number, item: any) => acc + item.quantity * item.price, 0);
+
   return (
-    <>
-      <div className="container flex justify-around items-start flex wrap mx-auto mt-8">
+    <div className="min-h-screen bg-primary pb-20">
+      <div className="container mx-auto px-4 pt-8 max-w-4xl">
         {cartItems.length === 0 ? (
           <EmptyState 
             title="Your cart is empty" 
@@ -34,84 +36,79 @@ const Cart = () => {
           />
         ) : (
           <>
-            <div className="flex flex-col w-[80%]">
-              <h1 className="text-2xl font-semibold mb-4">Shopping Cart</h1>
+            {/* Title */}
+            <h1 className="text-center text-4xl font-bold mb-8 font-display-sc text-text-primary">
+              MY CART
+            </h1>
 
-              {cartItems.map((item: any) => (
-                <div key={item._id} className="flex items-enter mb-[1rem] pb-2">
-                  <div className="w-[5rem] h-[5rem]">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-full object-cover rounded"
-                    />
-                  </div>
+            {/* Cart Items */}
+            <div className="space-y-0 mb-8">
+              {cartItems.map((item: any, index: number) => (
+                <div key={item._id}>
+                  <div className="flex items-start gap-4 py-6">
+                    {/* Product Image */}
+                    <div className="w-32 h-32 flex-shrink-0">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
 
-                  <div className="flex-1 ml-4">
-                    <Link to={`/product/${item._id}`} className="text-pink-500">
-                      {item.name}
-                    </Link>
+                    {/* Product Details */}
+                    <div className="flex-1 flex flex-col">
+                      <div className="mb-3">
+                        <h3 className="text-lg font-semibold text-text-primary uppercase tracking-wide">
+                          {item.name}
+                        </h3>
+                        <p className="text-base text-text-primary mt-2">
+                          Quantity : {String(item.quantity).padStart(2, '0')}
+                        </p>
+                        <p className="text-base text-text-primary font-semibold mt-1">
+                          ${item.price}
+                        </p>
+                      </div>
 
-                    <div className="mt-2 text-white">{item.brand}</div>
-                    <div className="mt-2 text-white font-bold">
-                      $ {item.price}
+                      {/* Remove Button */}
+                      <button
+                        className="px-6 py-2 bg-text-primary text-white rounded-[1.5rem] text-sm font-semibold uppercase tracking-wide self-start mt-2 border border-text-primary hover:bg-white hover:border-text-primary transition-all group"
+                        onClick={() => removeFromCartHandler(item._id)}
+                      >
+                        <span className="group-hover:text-black transition-colors">
+                          REMOVE
+                        </span>
+                      </button>
                     </div>
                   </div>
 
-                  <div className="w-24">
-                    <select
-                      className="w-full p-1 border rounded text-black"
-                      value={item.quantity}
-                      onChange={(e) =>
-                        addToCartHandler(item, Number(e.target.value))
-                      }
-                    >
-                      {[...Array(item.countInStock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <button
-                      className="text-red-500 mr-[5rem]"
-                      onClick={() => removeFromCartHandler(item._id)}
-                    >
-                      <FaTrash className="ml-[1rem] mt-[.5rem]" />
-                    </button>
-                  </div>
+                  {/* Separator Line */}
+                  {index < cartItems.length - 1 && (
+                    <div className="border-t border-component"></div>
+                  )}
                 </div>
               ))}
+            </div>
 
-              <div className="mt-8 w-[40rem]">
-                <div className="p-4 rounded-lg">
-                  <h2 className="text-xl font-semibold mb-2">
-                    Items ({cartItems.reduce((acc: number, item: any) => acc + item.quantity, 0)})
-                  </h2>
-
-                  <div className="text-2xl font-bold">
-                    ${" "}
-                    {cartItems
-                      .reduce((acc: number, item: any) => acc + item.quantity * item.price, 0)
-                      .toFixed(2)}
-                  </div>
-
-                  <button
-                    className="bg-pink-500 mt-4 py-2 px-4 rounded-full text-lg w-full"
-                    disabled={cartItems.length === 0}
-                    onClick={checkoutHandler}
-                  >
-                    Proceed To Checkout
-                  </button>
-                </div>
+            {/* Footer */}
+            <div className="bg-component py-6 px-6 flex justify-between items-center">
+              <div className="text-base font-semibold text-text-primary uppercase tracking-wide">
+                {totalItems} ITEM{totalItems !== 1 ? 'S' : ''} ${subtotal.toFixed(2)}
               </div>
+              
+              <button
+                className="px-8 py-3 bg-text-primary text-white rounded-[1.5rem] text-sm font-semibold uppercase tracking-wide border border-text-primary hover:bg-white hover:border-text-primary transition-all disabled:opacity-50 disabled:cursor-not-allowed group"
+                disabled={cartItems.length === 0}
+                onClick={checkoutHandler}
+              >
+                <span className="group-hover:text-black transition-colors">
+                  PLACE ORDER
+                </span>
+              </button>
             </div>
           </>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

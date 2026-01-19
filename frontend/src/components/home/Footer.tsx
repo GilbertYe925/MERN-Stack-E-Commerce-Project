@@ -1,22 +1,16 @@
 import { Link } from 'react-router-dom'
 import { FaInstagram, FaFacebook, FaTiktok } from 'react-icons/fa'
 import { HiOutlineChat } from 'react-icons/hi'
-import { useRef, useEffect } from 'react'
 import footerImage from '../../public/footer.png'
 
 const Footer = () => {
-  const footerRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    if (footerRef.current) {
-      footerRef.current.style.setProperty('--footer-bg-image', `url(${footerImage})`)
-    }
-  }, [])
 
   return (
     <footer
-      ref={footerRef}
-      className="relative w-full h-screen bg-cover bg-center overflow-x-hidden mb-0"
+      className="relative w-full bg-cover bg-center overflow-x-hidden mb-0"
+      style={{
+        backgroundImage: `url(${footerImage})`,
+      }}
     >
       <div
         className="relative z-10 flex flex-col items-center justify-center h-full px-[2rem]"

@@ -1,4 +1,4 @@
-import { useState, FormEvent, useEffect, useRef } from 'react'
+import { useState, FormEvent, useEffect } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -14,6 +14,9 @@ import Message from '../../components/common/Message'
 import HeartIcon from '../../components/products/HeartIcon'
 import Footer from '../../components/home/Footer'
 import ProductCard from '../../components/home/ProductCard'
+import { useScaleWrapper } from '../../hooks/useScaleWrapper'
+import { scrollToTop } from '../../hooks/useScrollToTop'
+import { paginate } from '../../utils/pagination'
 import { MdOutlineStarOutline } from 'react-icons/md'
 import { FaStar, FaRegStar, FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import buttonsImage from '../../public/buttons.png'
@@ -34,51 +37,16 @@ const ProductDetails = () => {
   const [createReview, { isLoading: loadingProductReview }] = useCreateReviewMutation()
   const { data: topProducts } = useGetTopProductsQuery(undefined)
 
-  const wrapperRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const updateScale = () => {
-      if (!wrapperRef.current) return
-
-      const viewportWidth = window.innerWidth
-      let scaleFactor = 1
-
-      if (viewportWidth >= 1920) {
-        scaleFactor = 1
-      } else if (viewportWidth >= 1280) {
-        scaleFactor = viewportWidth / 1920
-      } else {
-        scaleFactor = 1280 / 1920
-      }
-
-      wrapperRef.current.style.transform = `scale(${scaleFactor})`
-      wrapperRef.current.style.transformOrigin = 'top left'
-
-      // Set parent container height to match scaled wrapper height
-      // This prevents the body from extending beyond the scaled content
-      requestAnimationFrame(() => {
-        const wrapperHeight = wrapperRef.current?.offsetHeight || wrapperRef.current?.scrollHeight || 0
-        const scaledHeight = wrapperHeight * scaleFactor
-        
-        const parentContainer = wrapperRef.current?.parentElement
-        if (parentContainer && scaledHeight > 0) {
-          parentContainer.style.height = `${scaledHeight}px`
-          parentContainer.style.overflow = 'hidden'
-        }
-      })
-    }
-
-    updateScale()
-    window.addEventListener('resize', updateScale)
-
-    return () => {
-      window.removeEventListener('resize', updateScale)
-    }
-  }, [])
+  // Recalculate heights when product data finishes loading
+  const wrapperRef = useScaleWrapper({
+    manageHeights: false,
+    watchChanges: false,
+    recalculateTrigger: !isLoading && product, // Re-run when data loads
+  })
 
   useEffect(() => {
     // Immediately jump to top (not smooth) to override React Router's scroll restoration
-    window.scrollTo(0, 0)
+    scrollToTop()
   }, [productId])
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
@@ -154,10 +122,11 @@ const ProductDetails = () => {
 
   if (!product) return null
 
-  const currentPageReviews = product.reviews 
-    ? product.reviews.slice((reviewPage - 1) * reviewsPerPage, reviewPage * reviewsPerPage)
-    : []
-  const totalPages = product.reviews ? Math.ceil(product.reviews.length / reviewsPerPage) : 0
+  const { paginatedItems: currentPageReviews, totalPages } = paginate(
+    product.reviews,
+    reviewPage,
+    reviewsPerPage
+  )
 
   return (
     <div

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { scrollToTop } from '../../hooks/useScrollToTop'
 
 interface ProductCardProps {
   product: any
@@ -7,7 +8,7 @@ interface ProductCardProps {
 const ProductCard = ({ product }: ProductCardProps) => {
   const handleClick = () => {
     // Scroll to top immediately before navigation to prevent flashing
-    window.scrollTo(0, 0)
+    scrollToTop()
   }
 
   return (
